@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" data-layout-decorate="~{layouts/home-layout}">
-    <head id="head">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/home-layout}">
 
-    <title data-th-text="#{welcome_label}">Welcome - SpringRoo Application</title>
+  <head id="head">
+
+    <title th:text="#{welcome_label}">Welcome - SpringRoo Application</title>
 
   </head>
 
@@ -29,8 +34,8 @@
                    <img alt="Spring Roo" data-th-src="@{/public/img/springroo-logo.png}" src="../static/public/img/springroo-logo.png" />
                 </div>
                 <div class="col-sm-6">
-                  <h2 data-th-text="#{info_homepage_header}">With Roo you can easily build full Java applications in minutes.</h2>
-                  <p data-th-text="#{info_homepage_paragraph}">Spring Roo is a next-generation rapid application development tool for Java developers.
+                  <h2 th:text="#{info_homepage_header}">With Roo you can easily build full Java applications in minutes.</h2>
+                  <p th:text="#{info_homepage_paragraph}">Spring Roo is a next-generation rapid application development tool for Java developers.
                   It focuses on higher productivity, stock-standard Java APIs, high usability, avoiding engineering trade-offs and
                   facilitating easy Roo removal.
                   </p>

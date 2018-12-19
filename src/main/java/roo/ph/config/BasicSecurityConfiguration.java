@@ -24,6 +24,7 @@ public class BasicSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .authorizeRequests()
             .antMatchers("/").permitAll()
+            .antMatchers("/accessibility").permitAll()
             .antMatchers("/public/**").permitAll()
             .antMatchers("/webjars/**").permitAll()
             .antMatchers("/login/**").permitAll()
