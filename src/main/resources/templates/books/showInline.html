@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-layout-decorate="~{layouts/default-list-layout}">
+    <head id="head">
+
+    <title data-th-text="|#{label_show_entity(#{label_book})}|">Show Book - Spring Roo application</title>
+
+  </head>
+
+  <body id="body">
+
+    <header role="banner">
+      <!-- Content replaced by layout of the page displayed -->
+    </header>
+
+    <!--CONTAINER-->
+    <div class="container bg-container">
+      <!-- CONTENT -->
+      <!--
+        Only the inner content of the following tag "section" is included
+        within the template, in the section "content"
+      -->
+      <section data-th-fragment="inline-content" data-layout-fragment="content" data-th-object="${book}">
+        <div>
+
+          <!-- CONTENT -->
+            <div id="mainEntityFieldSet">
+              <ul class="list-unstyled" id="containerFields">
+                  <li id="book-name-field" data-z="a4541054">
+            	      <strong data-th-text="#{label_book_name}">name</strong>
+                    <span data-th-text="*{{name}}">nameValue</span>
+         	        </li>
+                  <li id="book-price-field" data-z="710ed88a">
+            	      <strong data-th-text="#{label_book_price}">price</strong>
+                    <span data-th-text="*{{price}}">priceValue</span>
+         	        </li>
+                  <li id="book-expenses-field" data-z="51c28bd4">
+            	      <strong data-th-text="#{label_book_expenses}">expenses</strong>
+                    <span data-th-text="*{{expenses}}">expensesValue</span>
+         	        </li>
+                  <li id="book-circul-field" data-z="df0e2eb4">
+            	      <strong data-th-text="#{label_book_circul}">circul</strong>
+                    <span data-th-text="*{{circul}}">circulValue</span>
+         	        </li>
+                  <li id="book-publication-field" data-z="b7d4e3ea">
+            	      <strong data-th-text="#{label_book_publication}">publication</strong>
+                    <span data-th-text="*{{publication}}">publicationValue</span>
+         	        </li>
+                  <li id="book-author-field" data-z="38902f14">
+            	      <strong data-th-text="#{label_book_author}">author</strong>
+                    <span data-th-text="*{{author}}">authorValue</span>
+         	        </li>
+              </ul>
+            </div>
+
+        </div>
+
+      </section>
+      <!-- /CONTENT -->
+  </div>
+  <!-- /CONTAINER -->
+
+  <footer class="container">
+    <!-- Content replaced by layout of the page displayed -->
+  </footer>
+
+  <!-- JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so that the pages load faster -->
+  <!-- JavaScript loaded by layout of the page displayed -->
+  <!--
+       Only the inner content of the following tag "javascript" is included
+       within the template, in the div "javascript"
+      -->
+  <div data-layout-fragment="javascript">
+  </div>
+
+  </body>
+
+</html>

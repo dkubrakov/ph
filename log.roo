@@ -1,0 +1,58 @@
+// Spring Roo 2.0.0.RELEASE [rev 4a2e9f1] log opened at 2018-12-20 00:07:37
+project setup --topLevelPackage roo.ph
+jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
+enum type --class ~.domain.reference.Appointment
+enum constant --name MANAGER
+enum constant --name EDITOR
+entity jpa --class ~.domain.Author --entityFormatExpression "#{name}"
+entity jpa --class ~.domain.Book --entityFormatExpression "#{name} $#{price}"
+entity jpa --class ~.domain.Employer --entityFormatExpression "#{name} (#{employeeStatus})"
+entity jpa --class ~.domain.Customer --entityFormatExpression "#{name}"
+entity jpa --class ~.domain.Contract --entityFormatExpression "#{salary}"
+entity jpa --class ~.domain.OrderBook --entityFormatExpression "#{orderDate}/#{deliverDate}"
+focus --class ~.domain.Book
+field string --fieldName name --sizeMax 255
+field number --fieldName price --type java.math.BigDecimal
+field number --fieldName expenses --type java.math.BigDecimal
+field number --fieldName circul --type int
+field date --fieldName publication --type java.util.Date --notNull --past --dateTimeFormatPattern "dd/MM/yyyy"
+focus --class ~.domain.Contract
+field number --fieldName salary --type java.math.BigDecimal
+focus --class ~.domain.Author
+field string --fieldName name --sizeMax 255
+field string --fieldName address --sizeMax 255
+field string --fieldName phone --sizeMax 255
+field set --fieldName books --type ~.domain.Book --mappedBy author --cardinality ONE_TO_MANY
+field set --fieldName contracts --type ~.domain.Contract --mappedBy author --cardinality ONE_TO_MANY
+focus --class ~.domain.Employer
+field string --fieldName name --sizeMax 255
+field string --fieldName address --sizeMax 255
+field string --fieldName phone --sizeMax 255
+field date --fieldName birthdate --type java.util.Date --notNull --past --dateTimeFormatPattern "dd/MM/yyyy"
+field enum --fieldName employeeStatus --type ~.domain.reference.Appointment
+field set --fieldName contracts --type ~.domain.Contract --mappedBy employer --cardinality ONE_TO_MANY
+focus --class ~.domain.Customer
+field string --fieldName name --sizeMax 255
+field string --fieldName address --sizeMax 255
+field string --fieldName phone --sizeMax 255
+focus --class ~.domain.OrderBook
+field date --fieldName orderDate --type java.util.Date --notNull --past --dateTimeFormatPattern "dd/MM/yyyy"
+field date --fieldName deliverDate --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy"
+field set --fieldName customers --type ~.domain.Customer --mappedBy orderBook --cardinality ONE_TO_MANY
+focus --class ~.domain.OrderBook
+field set --fieldName books --type ~.domain.Book --cardinality MANY_TO_MANY --joinTable my_ordersbooks_books --joinColumns my_orderbook --referencedColumns id --inverseJoinColumns my_book --inverseReferencedColumns id
+repository jpa --all --package ~.repository
+service --all --apiPackage ~.service.api --implPackage ~.service.impl
+finder add --entity ~.domain.Author --name findByName
+finder add --entity ~.domain.Book --name findByName
+finder add --entity ~.domain.Employer --name findByName
+finder add --entity ~.domain.Customer --name findByName
+web mvc setup
+web mvc view setup --type THYMELEAF
+web mvc controller --all --responseType JSON
+web mvc controller --all --responseType THYMELEAF
+web mvc finder --all --responseType THYMELEAF
+web mvc detail --all --views list,show --responseType THYMELEAF
+// script --file ph.roo
+// Spring Roo 2.0.0.RELEASE [rev 4a2e9f1] log opened at 2018-12-20 00:08:46
+push-in --all 

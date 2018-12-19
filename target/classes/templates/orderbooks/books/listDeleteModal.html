@@ -1,0 +1,24 @@
+<!--TABLE-->
+<div class="table-responsive" id="containerFields" data-th-fragment="books-detailModalConfirmBody" data-th-with="collectionLink=${@linkBuilder.of('OrderBooksItemBooksThymeleafController')}">
+    <table id="books-detail-table-item-to-remove" data-parent-table="orderbook-entity-table" data-data-parent-id="${orderBook != null ? orderBook.id : ''}" data-data-load-url="${collectionLink.to('datatablesByIdsIn').with('orderBook', '_PARENTID_')}">
+      <thead>
+        <tr>
+              <th data-data="name" data-th-text="#{label_orderbook_books_name}">name</th>
+              <th data-data="price" data-th-text="#{label_orderbook_books_price}">price</th>
+              <th data-data="expenses" data-th-text="#{label_orderbook_books_expenses}">expenses</th>
+              <th data-data="circul" data-th-text="#{label_orderbook_books_circul}">circul</th>
+              <th data-data="publication" data-th-text="#{label_orderbook_books_publication}">publication</th>
+        </tr>
+      </thead>
+      <tbody data-th-remove="all">
+        <tr>
+              <td>name</td>
+              <td>price</td>
+              <td>expenses</td>
+              <td>circul</td>
+              <td>publication</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- /TABLE -->

@@ -1,0 +1,18 @@
+<!--TABLE-->
+<div class="table-responsive" id="containerFields" data-th-fragment="orderbook-entityModalConfirmBody" data-th-with="collectionLink=${@linkBuilder.of('OrderBooksCollectionThymeleafController')},itemLink=${@linkBuilder.of('OrderBooksItemThymeleafController')}">
+    <table id="orderbook-entity-table-items-to-remove-batch" data-data-load-url="${collectionLink.to('datatablesByIdsIn')}">
+      <thead>
+        <tr>
+          <th data-data="orderDate" data-th-text="#{label_orderbook_orderdate}">orderDate</th>
+          <th data-data="deliverDate" data-th-text="#{label_orderbook_deliverdate}">deliverDate</th>
+        </tr>
+      </thead>
+      <tbody data-th-remove="all">
+        <tr>
+          <td>orderDate</td>
+          <td>deliverDate</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- /TABLE -->

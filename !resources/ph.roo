@@ -1,0 +1,125 @@
+// Project setup
+/////////////////
+
+// Create the Spring Boot application
+project setup --topLevelPackage roo.ph
+
+// Setup the data access layer
+//jpa setup --provider HIBERNATE --database MYSQL
+//jpa setup --provider HIBERNATE --database H2_IN_MEMORY --profile dev
+
+jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
+
+// The domain model
+
+/// Enumerations
+enum type --class ~.domain.reference.Appointment
+enum constant --name MANAGER
+enum constant --name EDITOR
+
+/// The JPA entities 
+entity jpa --class ~.domain.Author --entityFormatExpression "#{name}"
+entity jpa --class ~.domain.Book --entityFormatExpression "#{name} $#{price}"
+entity jpa --class ~.domain.Employer --entityFormatExpression "#{name} (#{employeeStatus})"
+entity jpa --class ~.domain.Customer --entityFormatExpression "#{name}"
+entity jpa --class ~.domain.Contract --entityFormatExpression "#{salary}"
+entity jpa --class ~.domain.OrderBook --entityFormatExpression "#{orderDate}/#{deliverDate}"
+
+focus --class ~.domain.Book
+field string --fieldName name --sizeMax 255
+field number --fieldName price --type java.math.BigDecimal
+field number --fieldName expenses --type java.math.BigDecimal
+field number --fieldName circul --type int
+field date --fieldName publication --type java.util.Date --notNull --past --dateTimeFormatPattern "dd/MM/yyyy"
+//field reference --fieldName author --type ~.domain.Author
+
+focus --class ~.domain.Contract
+field number --fieldName salary --type java.math.BigDecimal
+  
+focus --class ~.domain.Author
+field string --fieldName name --sizeMax 255
+field string --fieldName address --sizeMax 255
+field string --fieldName phone --sizeMax 255
+field set --fieldName books --type ~.domain.Book --mappedBy author --cardinality ONE_TO_MANY
+field set --fieldName contracts --type ~.domain.Contract --mappedBy author --cardinality ONE_TO_MANY
+
+focus --class ~.domain.Employer
+field string --fieldName name --sizeMax 255
+field string --fieldName address --sizeMax 255
+field string --fieldName phone --sizeMax 255
+field date --fieldName birthdate --type java.util.Date --notNull --past --dateTimeFormatPattern "dd/MM/yyyy"
+field enum --fieldName employeeStatus --type ~.domain.reference.Appointment
+field set --fieldName contracts --type ~.domain.Contract --mappedBy employer --cardinality ONE_TO_MANY
+
+focus --class ~.domain.Customer
+field string --fieldName name --sizeMax 255
+field string --fieldName address --sizeMax 255
+field string --fieldName phone --sizeMax 255
+
+focus --class ~.domain.OrderBook
+//field date --fieldName orderDate --type java.util.Calendar --column ORDER_DATE --persistenceType JPA_TIMESTAMP
+field date --fieldName orderDate --type java.util.Date --notNull --past --dateTimeFormatPattern "dd/MM/yyyy"
+field date --fieldName deliverDate --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy"
+field set --fieldName customers --type ~.domain.Customer --mappedBy orderBook --cardinality ONE_TO_MANY
+
+//// Category relations
+focus --class ~.domain.OrderBook
+field set --fieldName books --type ~.domain.Book --cardinality MANY_TO_MANY --joinTable my_ordersbooks_books --joinColumns my_orderbook --referencedColumns id --inverseJoinColumns my_book --inverseReferencedColumns id
+
+//// Category relations
+//focus --class ~.model.Category
+//field set --fieldName products --type ~.model.Product --cardinality MANY_TO_MANY --aggregation --joinTable my_products_categories --joinColumns my_product --referencedColumns id --inverseJoinColumns my_category --inverseReferencedColumns id
+
+//// Many to many relation with --joinTable and associated parameters
+//field set --fieldName stores --type ~.Store --cardinality MANY_TO_MANY --joinTable NW_SUPPLIER_STORES --joinColumns STORE --referencedColumns STORE_ID --inverseJoinColumns SUPPLIER --inverseReferencedColumns SUPPLIER_ID
+
+
+// Generate repositories
+repository jpa --all --package ~.repository
+
+// Generate service layer
+service --all --apiPackage ~.service.api --implPackage ~.service.impl
+                         
+// Generate finders
+//dto --class ~.domain.BookByName
+//field string --fieldName name
+//finder add --entity ~.domain.BookByName --name findByName --formBean ~.domain.BookByName
+
+finder add --entity ~.domain.Author --name findByName
+finder add --entity ~.domain.Book --name findByName
+finder add --entity ~.domain.Employer --name findByName
+finder add --entity ~.domain.Customer --name findByName
+
+web mvc setup
+web mvc view setup --type THYMELEAF
+web mvc controller --all --responseType JSON
+web mvc controller --all --responseType THYMELEAF
+
+// Publishing finders in web layer
+//web mvc finder --entity ~.domain.Author
+//web mvc finder --entity ~.domain.Author --responseType THYMELEAF
+
+// Publishing finders
+web mvc finder --all --responseType THYMELEAF
+
+
+// detail OneToMany aggregation
+//web mvc detail --entity ~.model.Customer --field orders
+//web mvc detail --entity ~.model.Customer --field orders --responseType THYMELEAF --views list,findByFirstNameAndLastName
+
+// Adding details
+//web mvc detail --entity ~.domain.Author --field books --views list,show --responseType THYMELEAF
+web mvc detail --all --views list,show --responseType THYMELEAF
+
+// The security layer
+//////////////////////
+
+// Spring security setup
+security setup --provider SPRINGLETS_JPA
+//security setup --provider DEFAULT
+
+// Method security
+
+/// Restrict delete method to user with roles ADMIN or EMPLEADO
+//security authorize --class ~.service.CustomerService --method delete --roles ADMIN,EMPLEADO
+

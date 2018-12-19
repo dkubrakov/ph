@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-layout-decorate="~{layouts/default-list-layout}">
+    <head id="head">
+
+    <title data-th-text="|#{label_show_entity(#{label_employer})}|">Show Employer - Spring Roo application</title>
+
+  </head>
+
+  <body id="body">
+
+    <header role="banner">
+      <!-- Content replaced by layout of the page displayed -->
+    </header>
+
+    <!--CONTAINER-->
+    <div class="container bg-container">
+      <!-- CONTENT -->
+      <!--
+        Only the inner content of the following tag "section" is included
+        within the template, in the section "content"
+      -->
+      <section data-th-fragment="inline-content" data-layout-fragment="content" data-th-object="${employer}">
+        <div>
+
+          <!-- CONTENT -->
+            <div id="mainEntityFieldSet">
+              <ul class="list-unstyled" id="containerFields">
+                  <li id="employer-name-field" data-z="74c0926">
+            	      <strong data-th-text="#{label_employer_name}">name</strong>
+                    <span data-th-text="*{{name}}">nameValue</span>
+         	        </li>
+                  <li id="employer-address-field" data-z="2e4b8658">
+            	      <strong data-th-text="#{label_employer_address}">address</strong>
+                    <span data-th-text="*{{address}}">addressValue</span>
+         	        </li>
+                  <li id="employer-phone-field" data-z="5bd50958">
+            	      <strong data-th-text="#{label_employer_phone}">phone</strong>
+                    <span data-th-text="*{{phone}}">phoneValue</span>
+         	        </li>
+                  <li id="employer-birthdate-field" data-z="87f710f8">
+            	      <strong data-th-text="#{label_employer_birthdate}">birthdate</strong>
+                    <span data-th-text="*{{birthdate}}">birthdateValue</span>
+         	        </li>
+                  <li id="employer-employeestatus-field" data-z="754349e6">
+            	      <strong data-th-text="#{label_employer_employeestatus}">employeeStatus</strong>
+                    <span data-th-text="*{{employeeStatus}}">employeeStatusValue</span>
+         	        </li>
+              </ul>
+            </div>
+
+        </div>
+
+      </section>
+      <!-- /CONTENT -->
+  </div>
+  <!-- /CONTAINER -->
+
+  <footer class="container">
+    <!-- Content replaced by layout of the page displayed -->
+  </footer>
+
+  <!-- JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so that the pages load faster -->
+  <!-- JavaScript loaded by layout of the page displayed -->
+  <!--
+       Only the inner content of the following tag "javascript" is included
+       within the template, in the div "javascript"
+      -->
+  <div data-layout-fragment="javascript">
+  </div>
+
+  </body>
+
+</html>

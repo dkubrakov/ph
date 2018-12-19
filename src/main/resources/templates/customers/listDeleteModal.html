@@ -1,0 +1,22 @@
+<!--TABLE-->
+<div class="table-responsive" id="containerFields" data-th-fragment="customer-entityModalConfirmBody" data-th-with="collectionLink=${@linkBuilder.of('CustomersCollectionThymeleafController')},itemLink=${@linkBuilder.of('CustomersItemThymeleafController')}">
+    <table id="customer-entity-table-item-to-remove" data-data-load-url="${collectionLink.to('datatablesByIdsIn')}">
+      <thead>
+        <tr>
+          <th data-data="name" data-th-text="#{label_customer_name}">name</th>
+          <th data-data="address" data-th-text="#{label_customer_address}">address</th>
+          <th data-data="phone" data-th-text="#{label_customer_phone}">phone</th>
+          <th data-data="orderBook" data-th-text="#{label_customer_orderbook}">orderBook</th>
+        </tr>
+      </thead>
+      <tbody data-th-remove="all">
+        <tr>
+          <td>name</td>
+          <td>address</td>
+          <td>phone</td>
+          <td>orderBook</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- /TABLE -->
